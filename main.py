@@ -27,11 +27,11 @@ data = response.json()
 # print(data)
 
 # return all data from sheet
-sheety_response = requests.get(url=SHEETY_ENDPOINT)
-sheety_response.raise_for_status()
+# sheety_response = requests.get(url=SHEETY_ENDPOINT)
+# sheety_response.raise_for_status()
 
 current_date = dt.datetime.now()
-print(sheety_response.json())
+# print(sheety_response.json())
 
 for idx, exercise in enumerate(data["exercises"]):
     sheety_json = {
@@ -43,5 +43,9 @@ for idx, exercise in enumerate(data["exercises"]):
         }
     }
 
-    sheety_post_response = requests.post(url=SHEETY_ENDPOINT, json=sheety_json)
+    sheety_header = {
+        "Authorization": str
+    }
+
+    sheety_post_response = requests.post(url=SHEETY_ENDPOINT, json=sheety_json, headers=sheety_header)
     print(sheety_post_response.text)
